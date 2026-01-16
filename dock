@@ -10,10 +10,18 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
 # Docker Compose komutu
-COMPOSE="docker compose"
+# Docker Compose komutunu belirle
+if docker compose version >/dev/null 2>&1; then
+    COMPOSE="docker compose"
+elif docker.exe compose version >/dev/null 2>&1; then
+    COMPOSE="docker.exe compose"
+else
+    echo "Docker bulunamadı! Lütfen Docker Desktop'ı kurun."
+    exit 1
+fi
 
 # Yardım mesajı
 show_help() {
